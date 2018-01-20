@@ -136,6 +136,8 @@ class LoginActivity : AppCompatActivity() {
             putString("password", mPassword)
             commit()
         }
+        val intent = Intent(applicationContext,Main2Activity::class.java)
+        startActivity(intent)
     }
 
     inner class UserLoginTask internal constructor(private val username: String, private val mPassword: String) : AsyncTask<Void, Void, Boolean>() {
