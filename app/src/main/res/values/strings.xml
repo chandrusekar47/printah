@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">printah</string>
+    <!-- Strings related to login -->
+    <string name="osu_username">OSU username</string>
+    <string name="prompt_password">OSU Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="error_invalid_email">Please enter a valid OSU username (lastName.#)</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
 </resources>
