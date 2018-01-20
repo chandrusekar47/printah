@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.TargetApi
 import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
@@ -140,23 +141,7 @@ class LoginActivity : AppCompatActivity() {
     inner class UserLoginTask internal constructor(private val username: String, private val mPassword: String) : AsyncTask<Void, Void, Boolean>() {
 
         override fun doInBackground(vararg params: Void): Boolean? {
-            val config = java.util.Properties()
-            config.put("StrictHostKeyChecking", "no")
-            val jSch = JSch()
-            val host = "stdlinux.cse.ohio-state.edu"
-            val session = jSch.getSession(username, host)
-            session.setPassword(mPassword)
-            session.setConfig(config)
-            return try {
-                session.connect()
-                Log.i(localClassName, "Login successful")
-                val connected = session.isConnected
-                session.disconnect()
-                connected
-            } catch (e: Exception) {
-                Log.e("Unable to login", e.message, e)
-                false
-            }
+            return SshApi().isUserValid(username, mPassword)
         }
 
         override fun onPostExecute(success: Boolean?) {
