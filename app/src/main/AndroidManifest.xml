@@ -20,8 +20,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ViewPDF"
-            android:label="@string/title_activity_view_pdf"
+            android:name=".MainActivity"
+            android:label="MainActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Main2Activity">
         </activity>
