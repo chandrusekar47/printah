@@ -11,4 +11,5 @@
     <string name="button_files">Select file</string>
     <string name="button_url">Specify URL</string>
     <string name="button_history">Print History</string>
+    <string name="title_activity_view_pdf">ViewPDF</string>
 </resources>
