@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import android.content.Intent
+import android.net.Uri
 
 
 class MainActivity : AppCompatActivity() {
@@ -12,7 +14,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-       pdfView.fromAsset("sample3.pdf").load()
+        val myIntent = intent       // gets the previously created intent
+        val URIval = myIntent.getStringExtra("pdfURI")
+        pdfView.fromUri(Uri.parse(URIval)).load()
         printButton.setOnClickListener{
             Log.i("yolo","heyyyy")
             Toast.makeText(this@MainActivity,"You clicked the Print button biyaatch",Toast.LENGTH_SHORT).show()

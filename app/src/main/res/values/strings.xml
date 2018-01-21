@@ -12,4 +12,5 @@
     <string name="button_url">Specify URL</string>
     <string name="button_history">Print History</string>
     <string name="title_activity_view_pdf">ViewPDF</string>
+    <string name="prompt_url">Enter URL</string>
 </resources>
