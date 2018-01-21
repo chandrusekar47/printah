@@ -22,18 +22,21 @@ private val TAG = MainActivity::class.java.simpleName
 
 class UrlSelectionActivity : AppCompatActivity() {
 
+    var list: ArrayList<Long> = ArrayList()
+    lateinit var downloadManager : DownloadManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_url_selection)
         registerReceiver(onComplete,
-                 IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+                 IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+        downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
     }
 
     override fun onDestroy()
     {
-        super.onDestroy();
-        unregisterReceiver(onComplete);
+        super.onDestroy()
+        unregisterReceiver(onComplete)
     }
 
     fun getURL(view: View) {
@@ -68,29 +71,35 @@ class UrlSelectionActivity : AppCompatActivity() {
     private fun useDownloadManager() {
         val editText = findViewById<EditText>(R.id.editText)
         val pdfUrl = editText.text.toString()
-        val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        val request = DownloadManager.Request(Uri.parse(pdfUrl))
+        val pdfSplit = pdfUrl.split("/")
+        val pdfName = pdfSplit[pdfSplit.size-1]
 
+        val request = DownloadManager.Request(Uri.parse(pdfUrl))
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
         request.setAllowedOverRoaming(false)
         request.setDescription("Downloading the file")
         request.setVisibleInDownloadsUi(true)
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,      "Sample" + ".pdf")
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,pdfName)
 
-        downloadManager.enqueue(request)
+        list.add(downloadManager.enqueue(request))
+
+
     }
 
     var onComplete: BroadcastReceiver = object : BroadcastReceiver() {
 
         override fun onReceive(ctxt: Context, intent: Intent) {
 
-            val referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+            val refId = list[0]
+            list.remove(refId)
 
-//            val intent = Intent(applicationContext,MainActivity::class.java).apply {
-//                putExtra("pdfURI",pdfUrl)
-//            }
-//            startActivity(intent
+            val pdfUri = downloadManager.getUriForDownloadedFile(refId)
+
+            val intentNew = Intent(applicationContext,MainActivity::class.java).apply {
+                putExtra("pdfURI",pdfUri.toString())
+            }
+            startActivity(intentNew)
 
         }
     }
