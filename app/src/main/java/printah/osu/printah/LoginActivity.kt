@@ -10,16 +10,19 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
-import com.jcraft.jsch.JSch
 import kotlinx.android.synthetic.main.activity_login.*
 
+
 class LoginActivity : AppCompatActivity() {
-    private val preferencesFile = "osu.cse.printah.PREFERENCE_FILE_KEY"
+    companion object {
+        val preferencesFile = "osu.cse.printah.PREFERENCE_FILE_KEY"
+        val userNameKey = "username"
+        val passwordKey = "password"
+    }
     private var mAuthTask: UserLoginTask? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -132,8 +135,8 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT).show()
         val sharedPref = getSharedPreferences(preferencesFile, Context.MODE_PRIVATE)
         with(sharedPref.edit()) {
-            putString("username", username)
-            putString("password", mPassword)
+            putString(userNameKey, username)
+            putString(passwordKey, mPassword)
             commit()
         }
         val intent = Intent(applicationContext,Main2Activity::class.java)
@@ -143,7 +146,10 @@ class LoginActivity : AppCompatActivity() {
     inner class UserLoginTask internal constructor(private val username: String, private val mPassword: String) : AsyncTask<Void, Void, Boolean>() {
 
         override fun doInBackground(vararg params: Void): Boolean? {
-            return SshApi().isUserValid(username, mPassword)
+            val sshApi = SshApi(username, mPassword)
+            val loginSuccessful = sshApi.login()
+            sshApi.close()
+            return loginSuccessful
         }
 
         override fun onPostExecute(success: Boolean?) {

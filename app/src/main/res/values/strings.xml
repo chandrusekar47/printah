@@ -16,4 +16,16 @@
     <string name="button_download">Download</string>
     <string name="button_check_status">Status</string>
     <string name="button_cancel_download">Cancel</string>
+    <string name="print_options_title">Print options</string>
+    <string name="choose_sides">Choose sides</string>
+    <string name="choose_orientation">Choose orientation</string>
+    <string name="number_of_copies">Number of sides</string>
+    <string name="print">Print</string>
+    <string name="printing_title">Printing</string>
+    <string name="file_copy_progress_message">Teleporting file</string>
+    <string name="print_progress_message">Small-talking with printer</string>
+    <string name="print_failed_message">Printer kicked us out :(</string>
+    <string name="print_success_message">Your copies are hot and ready!</string>
+    <string name="try_different_printer">Try Different printer</string>
+    <string name="try_again">Try again</string>
 </resources>
