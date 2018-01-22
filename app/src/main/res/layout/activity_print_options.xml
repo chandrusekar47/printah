@@ -26,8 +26,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/choose_sides"
-            tools:text="Choose sides" />
+            android:text="@string/choose_sides"/>
 
         <Spinner
             android:id="@+id/sidesSpinner"
@@ -37,8 +36,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/choose_sides"
-            tools:text="Choose sides" />
+            android:text="@string/choose_orientation" />
 
         <Spinner
             android:id="@+id/orientationSpinner"
@@ -49,8 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:labelFor="@id/numberOfCopies"
-            android:text="@string/number_of_copies"
-            tools:text="Number of copies" />
+            android:text="@string/number_of_copies" />
 
         <EditText
             android:id="@+id/numberOfCopies"
