@@ -26,10 +26,14 @@
             android:name=".MainActivity"
             android:label="MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Main2Activity">
-        </activity>
         <activity android:name=".UrlSelectionActivity"/>
         <activity android:name=".PrintOptionsActivity" />
+        <activity android:name=".Main2Activity"></activity>
+        <activity
+            android:name=".DisplayPrinterActivity"
+            android:label="@string/title_activity_display_printer"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:exported="true"></activity>
     </application>
 
 </manifest>

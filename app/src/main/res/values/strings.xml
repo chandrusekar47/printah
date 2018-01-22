@@ -28,4 +28,5 @@
     <string name="print_success_message">Your copies are hot and ready!</string>
     <string name="try_different_printer">Try Different printer</string>
     <string name="try_again">Try again</string>
+    <string name="title_activity_display_printer">DisplayPrinterActivity</string>
 </resources>
