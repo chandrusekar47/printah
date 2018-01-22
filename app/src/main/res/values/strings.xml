@@ -14,4 +14,6 @@
     <string name="title_activity_view_pdf">ViewPDF</string>
     <string name="prompt_url">Enter URL</string>
     <string name="button_download">Download</string>
+    <string name="button_check_status">Status</string>
+    <string name="button_cancel_download">Cancel</string>
 </resources>
