@@ -25,9 +25,10 @@
         <activity
             android:name=".MainActivity"
             android:label="MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"/>   
         <activity android:name=".UrlSelectionActivity"/>
-        <activity android:name=".PrintOptionsActivity" />
+        <activity android:name=".PrintOptionsActivity"
+            android:exported="true"/>
         <activity android:name=".Main2Activity"></activity>
         <activity
             android:name=".DisplayPrinterActivity"

@@ -1,5 +1,6 @@
 package printah.osu.printah
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.renderscript.ScriptGroup
@@ -91,6 +92,7 @@ class DisplayPrinterActivity : AppCompatActivity(){
 
         //linking
         printerListView.adapter = sa
+        */
 
         printerListView.onItemClickListener = AdapterView.OnItemClickListener{adapterView, view, position, id ->
 
@@ -101,8 +103,17 @@ class DisplayPrinterActivity : AppCompatActivity(){
             sb.append(selected["line2"] + "\n")
             sb.append(selected["line3"] + "\n")
             Toast.makeText(applicationContext, sb.toString(), Toast.LENGTH_SHORT).show()
+
+            val myIntent = intent       // gets the previously created intent
+            val URIval = myIntent.getStringExtra("pdfURI")
+            val printerName = selected["line2"]
+            val intent = Intent(applicationContext,PrintOptionsActivity::class.java)
+            intent.putExtra("printerUri",printerName.toString())
+            intent.putExtra("pdfURI",URIval.toString())
+
+            startActivity(intent)
         }
-        */
+
 
     }
 

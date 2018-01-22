@@ -18,6 +18,12 @@ class MainActivity : AppCompatActivity() {
         val URIval = myIntent.getStringExtra("pdfURI")
         pdfView.fromUri(Uri.parse(URIval)).load()
         printButton.setOnClickListener{
+
+            val pdfUri = URIval
+            val intent = Intent(applicationContext,DisplayPrinterActivity::class.java)
+            intent.putExtra("pdfURI",pdfUri.toString())
+            startActivity(intent)
+
             Log.i("yolo","heyyyy")
             Toast.makeText(this@MainActivity,"You clicked the Print button biyaatch",Toast.LENGTH_SHORT).show()
         }

@@ -35,15 +35,19 @@ class PrintOptionsActivity : AppCompatActivity() {
         val sidesOptions = sidesSpinner.selectedItem as PrintSidesOptions
         val orientationOption = orientationSpinner.selectedItem as PrintOrientationOptions
         val numberOfCopies = numberOfCopies.text.toString().toInt()
-        val fileToPrintUri = Uri.fromFile(File("//android_asset/sample.pdf"))
-        val printerName = "lj_dl_395_a"
+        val myIntent = intent
+        val fileToPrintUri = myIntent.getStringExtra("pdfURI")
+        val printerName = myIntent.getStringExtra("printerUri")
+
+        //val fileToPrintUri = Uri.fromFile(File("//android_asset/sample.pdf"))
+        //val printerName = "lj_dl_395_a"
         showProgressIndicator()
         val sharedPreferences = getSharedPreferences(LoginActivity.preferencesFile, Context.MODE_PRIVATE)
         val username = sharedPreferences.getString(LoginActivity.userNameKey, "")
         val password = sharedPreferences.getString(LoginActivity.passwordKey, "")
         PrintAsyncTask(username,
                 password,
-                fileToPrintUri,
+                Uri.parse(fileToPrintUri),
                 "-P", printerName,
                 "-#", numberOfCopies.toString(),
                 "-o", orientationOption.lprParameter,
@@ -84,7 +88,7 @@ class PrintOptionsActivity : AppCompatActivity() {
                 val sshApi = SshApi(username, password)
                 sshApi.login()
                 publishProgress(25)
-                val inputStream = assets.open("sample.pdf")
+                val inputStream = contentResolver.openInputStream(sourceFile)
                 val destFileName: String = sshApi.scpFile(inputStream)
                 publishProgress(50)
                 sshApi.printFile(destFileName, *lprOptions)
